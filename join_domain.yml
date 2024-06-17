@@ -2,9 +2,9 @@
 - hosts: all
   gather_facts: false
   tasks:
-    - name: join host to city.medicine-hat.ab.ca with automatic reboot
+    - name: join host to {{ domain }} with automatic reboot
       microsoft.ad.membership:
-        dns_domain_name: city.medicine-hat.ab.ca
+        dns_domain_name: "{{ domain }}"
         hostname: "{{ win_host }}"
         domain_admin_user: "{{ domain_user }}"
         domain_admin_password: "{{ domain_pass }}"
