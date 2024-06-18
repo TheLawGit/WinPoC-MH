@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+    - name: Create a group in a custom path
+      microsoft.ad.group:
+        name: "{{ ansible_hostname }}_LA"
+        scope: universal
+        path: "{{ domain_ou }}"
+        state: present
