@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: true
   tasks:
-    - name: Create a group in a custom path
+    - name: Create "{{ ansible_hostname }}_LA" in Active Directory
       microsoft.ad.group:
         name: "{{ ansible_hostname }}_LA"
         scope: universal
@@ -10,4 +10,11 @@
         domain_username: "{{ domain_user }}"
         domain_password: "{{ domain_password }}"
         domain_server: "{{ domain_server }}"
+        state: present
+
+    - name: Add Local Admins group to Administrators group on {{ ansible_hostname }}
+      ansible.windows.win_group_membership:
+        name: Administrators
+        members:
+          - "City\{{ ansible_hostname }}_LA"
         state: present
