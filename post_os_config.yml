@@ -8,3 +8,10 @@
         name: fDenyTSConnections
         data: 0
         type: dword
+        
+    - name: Getting List of Interfaces under
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces
+      register: interfaces
+      debug:
+        msg: "{{ interfaces }}"
