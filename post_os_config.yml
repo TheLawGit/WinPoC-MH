@@ -13,5 +13,3 @@
       ansible.windows.win_reg_stat:
         path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces
       register: interfaces
-      debug:
-        msg: "{{ interfaces }}"
