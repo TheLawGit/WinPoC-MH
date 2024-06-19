@@ -16,8 +16,8 @@
 
     - name: Changing NetBiosOption Registry recursively under Interfaces
       ansible.windows.win_regedit:
-        path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\"{{ interfaces }}"
+        path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\"{{ item }}"
         name: NetBiosOptions
         data: 2
         type: dword
-        
+      loop: "{{ interfaces }}"
