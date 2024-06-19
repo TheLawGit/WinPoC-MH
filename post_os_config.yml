@@ -20,4 +20,4 @@
         name: NetBiosOptions
         data: 2
         type: dword
-      loop: "{{ interfaces }}"
+      loop: "{{ interfaces.sub_keys }}"
