@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Copy Files
+      ansible.windows.win_copy:
+        src: \\THELAW-AD\Users\Administrator\Downloads\Share\
+        dest: C:\Temp
+        remote_src: true
+#  become: yes
+#  become_method: runas
+#  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+#  vars:
+#    ansible_become_user: Username2
+#    ansible_become_pass: password2
