@@ -16,5 +16,5 @@
       ansible.windows.win_group_membership:
         name: Administrators
         members:
-          - "City\{{ ansible_hostname }}_LA"
+          - "City'\'{{ ansible_hostname }}_LA"
         state: present
