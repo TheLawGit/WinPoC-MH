@@ -25,3 +25,10 @@
     - name: Set Time Zone to Mountain Standard Time (MST)
       community.windows.win_timezone:
         timezone: Mountain Standard Time
+
+    - name: Adding Windows Product Key
+      ansible.windows.win_shell: |
+        $key = "JCNG6-RXVCM-DK42M-6KG7W-6MWV3"
+        $service = get-wmiObject -query "select * from SoftwareLicensingService"
+        $service.InstallProductKey($key)
+        $service.RefreshLicenseStatus()
