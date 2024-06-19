@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+    - name: Initialize {{ disk_num }} disk
+      community.windows.win_initialize_disk:
+        disk_number: "{{ disk_num }}"
+        style: "{{ part_style }}"
+
+    - name: Create a partition with drive letter {{ drive_letter }}
+      community.windows.win_partition:
+        drive_letter: "{{ drive_letter }}"
+        partition_size: -1
+        disk_number: "{{ disk_num }}"
+
+    - name: Format the disk and assign the label
+      community.windows.win_format:
+      drive_letter: "{{ drive_letter }}"
+      file_system: "{{ fs_type }}"
+      new_label: "{{ disk_label }}"
