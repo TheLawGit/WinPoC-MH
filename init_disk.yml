@@ -15,6 +15,6 @@
 
     - name: Format the disk and assign the label
       community.windows.win_format:
-      drive_letter: "{{ drive_letter }}"
-      file_system: "{{ fs_type }}"
-      new_label: "{{ disk_label }}"
+        drive_letter: "{{ drive_letter }}"
+        file_system: "{{ fs_type }}"
+        new_label: "{{ disk_label }}"
