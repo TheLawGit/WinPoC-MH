@@ -21,3 +21,7 @@
         data: 2
         type: dword
       loop: "{{ interfaces.sub_keys }}"
+
+    - name: Set Time Zone to Mountain Standard Time (MST)
+      community.windows.win_timezone:
+        timezone: Mountain Standard Time
