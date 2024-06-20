@@ -5,8 +5,8 @@
     - name: Unblock InstallAgent.ps1 script
       ansible.windows.win_shell: Unblock-File -Path C:\EndpointInstall\InstallAgent.ps1
       
-    - name: Install Endpoint Central using PowerShell script
-      ansible.windows.win_shell: C:\EndpointInstall\InstallAgent.ps1 >> C:\EndpointInstall\EC_Install.log
+    - name: Install Endpoint Central using setup.bat script
+      ansible.windows.win_shell: C:\EndpointInstall\setup.bat >> C:\EndpointInstall\EC_Install.log
       args:
         chdir: C:\EndpointInstall
         creates: C:\EndpointInstall\EC_Install.log
