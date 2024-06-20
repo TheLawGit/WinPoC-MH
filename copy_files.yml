@@ -4,8 +4,8 @@
   tasks:
     - name: Copy Files
       ansible.windows.win_copy:
-        src: \\THELAW-AD\Users\Administrator\Downloads\Share\
-        dest: C:\Temp\
+        src: "{{ file_src }}"
+        dest: "{{ destination }}"
         remote_src: true
       become_method: runas
       become_flags: logon_type=new_credentials logon_flags=netcredentials_only
