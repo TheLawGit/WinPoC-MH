@@ -2,6 +2,11 @@
 - hosts: all
   gather_facts: false
   tasks:
+    - name: Create Directory {{ dir }}
+      ansible.windows.win_file:
+        path: "{{ dir }}"
+        state: directory
+        
     - name: Copy Files
       ansible.windows.win_copy:
         src: "{{ file_src }}"
