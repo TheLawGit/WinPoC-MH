@@ -12,7 +12,7 @@
         msiexec /i "UEMSAgent.msi" /qn TRANSFORMS="UEMSAgent.mst"
         ENABLESILENT=yes REBOOT=ReallySuppress INSTALLSOURCE=Manual
         SERVER_ROOT_CRT="%cd%\DMRootCA-Server.crt"
-        DS_ROOT_CRT="%cd%\DMRootCA.crt" /lv "Agentinstalllog.txt"'
+        DS_ROOT_CRT="%cd%\DMRootCA.crt" /lv "Agentinstalllog.txt"
       args:
         chdir: C:\EndpointInstall
         creates: C:\EndpointInstall\EC_Install.log
