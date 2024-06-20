@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Change the working directory to somedir/ before executing the command
+      ansible.windows.win_shell: C:\EndpointInstall\InstallAgent.ps1 >> C:\EndpointInstall\EC_Install.log
+      args:
+        chdir: C:\EndpointInstall
+        creates: C:\EndpointInstall\EC_Install.log
