@@ -9,4 +9,4 @@
       args:
         chdir: C:\SentinelOneInstall
         creates: C:\SentinelOneInstall\SentinelOne_Install.log
-      ignore_errors: false
+      #ignore_errors: true
