@@ -2,10 +2,9 @@
 - hosts: all
   gather_facts: false
   tasks:
-    - name: Run Shell Command to Install Endpoint Central
-      ansible.windows.win_shell: |
+    - name: Run Shell Command to Install Sentinel One
+      ansible.windows.win_shell: C:\SentinelOneInstall\install.bat
 #        msiexec /i SentinelOneInstaller_windows_64bit_v23_4_4_223.exe /q /NORESTART SITE_TOKEN="eyJ1cmwiOiAiaHR0cHM6Ly91c2VhMS0wMTYuc2VudGluZWxvbmUubmV0IiwgInNpdGVfa2V5IjogIjY4ZmQyZGZkMGExNmI0ZTEifQ==" WSC=false
-         C:\SentinelOneInstall\install.bat
       args:
         chdir: C:\SentinelOneInstall
         creates: C:\SentinelOneInstall\SentinelOne_Install.log
