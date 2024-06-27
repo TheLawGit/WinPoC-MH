@@ -27,12 +27,35 @@
         timezone: Mountain Standard Time
       tags: timezone
 
-    - name: Allowing RDP on Windows Firewall
+    #- name: Allowing RDP on Windows Firewall
+    #  community.windows.win_firewall_rule:
+    #    group: "@FirewallAPI.dll,-28752"
+    #    enabled: yes
+    #  tags: firewall
+
+    - name: Firewall rule to allow RDP on TCP port 3389
       community.windows.win_firewall_rule:
-        group: "@FirewallAPI.dll,-28752"
+        name: Remote Desktop
+        localport: 3389
+        action: allow
+        direction: in
+        protocol: tcp
+        #profiles: private
+        state: present
         enabled: yes
       tags: firewall
 
+    - name: Firewall rule to allow ICMP v4 (ping)
+      community.windows.win_firewall_rule:
+        name: ICMP Allow incoming V4 echo request
+        enabled: yes
+        state: present
+        #profiles: private
+        action: allow
+        direction: in
+        protocol: icmpv4
+      tage: icmp
+      
     - name: Adding Windows Product Key
       ansible.windows.win_shell: |
         $key = "JCNG6-RXVCM-DK42M-6KG7W-6MWV3"
