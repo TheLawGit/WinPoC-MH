@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+      
+    - name: Add {{ local_admin }} to Administrators group on {{ ansible_hostname }}
+      ansible.windows.win_group_membership:
+        name: Administrators
+        members:
+          - "{{ local_admin }}@{{ domain_server }}"
+        state: present
