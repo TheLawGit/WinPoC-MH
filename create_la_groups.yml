@@ -19,7 +19,7 @@
         domain_server: "{{ domain_server }}"
         state: present
 
-    - name: Install AD LDS
+    - name: Remove AD LDS
       ansible.windows.win_feature:
         name: ADLDS
         state: absent
