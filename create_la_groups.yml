@@ -2,6 +2,13 @@
 - hosts: all
   gather_facts: true
   tasks:
+
+    - name: Install AD LDS
+      ansible.windows.win_feature:
+        name: ADLDS
+        state: present
+      tags: install-adlds
+      
     - name: Create "{{ ansible_hostname }}_LA" in Active Directory
       microsoft.ad.group:
         name: "{{ ansible_hostname }}_LA"
@@ -12,6 +19,12 @@
         domain_server: "{{ domain_server }}"
         state: present
 
+    - name: Install AD LDS
+      ansible.windows.win_feature:
+        name: ADLDS
+        state: absent
+      tags: remove-adlds
+      
     - name: Add Local Admins group to Administrators group on {{ ansible_hostname }}
       ansible.windows.win_group_membership:
         name: Administrators
