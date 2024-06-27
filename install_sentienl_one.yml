@@ -5,7 +5,7 @@
     - name: Run Shell Command to Install Sentinel One
       ansible.windows.win_shell: 
       #C:\SentinelOneInstall\install.bat
-        msiexec /i SentinelInstaller_windows_64bit_v23_4_4_223.msi /q /NORESTART SITE_TOKEN="eyJ1cmwiOiAiaHR0cHM6Ly91c2VhMS0wMTYuc2VudGluZWxvbmUubmV0IiwgInNpdGVfa2V5IjogIjY4ZmQyZGZkMGExNmI0ZTEifQ==" WSC=false
+        msiexec /i SentinelInstaller_windows_64bit_v23_4_4_223.msi /q /NORESTART SITE_TOKEN="eyJ1cmwiOiAiaHR0cHM6Ly91c2VhMS0wMTYuc2VudGluZWxvbmUubmV0IiwgInNpdGVfa2V5IjogIjY4ZmQyZGZkMGExNmI0ZTEifQ==" WSC=false /lv "SentinelOne_Install.txt"
       args:
         chdir: C:\SentinelOneInstall
         creates: C:\SentinelOneInstall\SentinelOne_Install.log
