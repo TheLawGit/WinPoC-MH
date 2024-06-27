@@ -7,8 +7,8 @@
         name: "{{ ansible_hostname }}_LA"
         scope: universal
         path: "{{ domain_ou }}"
-        domain_username: "{{ domain_user }}"
-        domain_password: "{{ domain_password }}"
+        #domain_username: "{{ domain_user }}"
+        #domain_password: "{{ domain_password }}"
         domain_server: "{{ domain_server }}"
         state: present
 
