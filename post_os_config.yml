@@ -55,6 +55,18 @@
         direction: in
         protocol: icmpv4
       tage: icmp
+
+    - name: Firewall rule to allow WinRM Ports
+      community.windows.win_firewall_rule:
+        name: WinRM
+        enabled: yes
+        state: present
+        #profiles: private
+        action: allow
+        direction: in
+        localport: 5985-5986
+        protocol: tcp
+      tage: winrm
       
     - name: Adding Windows Product Key
       ansible.windows.win_shell: |
