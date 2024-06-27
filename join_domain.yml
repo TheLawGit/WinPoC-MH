@@ -1,11 +1,11 @@
 ---
 - hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: join host to {{ domain }} with automatic reboot
       microsoft.ad.membership:
         dns_domain_name: "{{ domain }}"
-        hostname: "{{ win_host }}"
+        hostname: "{{ ansible_hostname }}"
         domain_admin_user: "{{ domain_user }}"
         domain_admin_password: "{{ domain_pass }}"
         domain_ou_path: "{{ domain_ou }}"
