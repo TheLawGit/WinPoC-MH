@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Remove {{ user }} From Server
+      ansible.windows.win_user:
+        name: "{{ user }}"
+        state: absent
