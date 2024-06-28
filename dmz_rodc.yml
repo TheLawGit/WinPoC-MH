@@ -2,17 +2,23 @@
 - hosts: all
   gather_facts: true
   tasks:
-      
-    - name: Create "{{ ansible_hostname }}" Computer Object in Active Directory
-      microsoft.ad.computer:
-        domain_username: "{{ domain_user }}"
-        domain_password: "{{ domain_password }}"
-        domain_server: "{{ domain_server }}"
-        name: "{{ ansible_hostname }}"
-        sam_account_name: "{{ ansible_hostname }}"
-        path: "{{ domain_ou }}"
-        enabled: true
-        state: present
-        attributes:
-          add:
-            accountPassword: efwinfwin938839fvi$$
+
+    - name: Generate random string with length 24
+      ansible.builtin.debug:
+        var: lookup('community.general.random_string', min_lower=1, min_upper=1, min_special=1, min_numeric=1, length=24)
+      register: comppass
+
+        
+#    - name: Create "{{ ansible_hostname }}" Computer Object in Active Directory
+#      microsoft.ad.computer:
+#        domain_username: "{{ domain_user }}"
+#        domain_password: "{{ domain_password }}"
+#        domain_server: "{{ domain_server }}"
+#        name: "{{ ansible_hostname }}"
+#        sam_account_name: "{{ ansible_hostname }}"
+#        path: "{{ domain_ou }}"
+#        enabled: true
+#        state: present
+#        attributes:
+#          add:
+#            accountPassword: efwinfwin938839fvi$$
