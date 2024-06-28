@@ -1,0 +1,10 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Add AD Groups to Administrators group on Server
+      ansible.windows.win_group_membership:
+        name: Administrators
+        members:
+          - "{{ item }}@{{ domain_server }}"
+        state: present
+      loop: "{{ ad_groups }}"
