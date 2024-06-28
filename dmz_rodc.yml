@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+      
+    - name: Create "{{ ansible_hostname }}" Computer Object in Active Directory
+      microsoft.ad.computer:
+        domain_username: "{{ domain_user }}"
+        domain_password: "{{ domain_password }}"
+        domain_server: "{{ domain_server }}"
+        name: "{{ ansible_hostname }}
+        sam_account_name: "{{ ansible_hostname }}"
+        path: "{{ domain_ou }}"
+        enabled: true
+        state: present
+        attributes:
+          add:
+            AccountPassword: efwinfwin938839fvi$$
