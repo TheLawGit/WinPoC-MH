@@ -34,7 +34,7 @@
     - name: Create DNS Record
       ansible.windows.win_powershell:
         script: |   
-          Add-DnsServerResourceRecordA -Computername "{{ InternalADServer }}" -Name "{{ dmz_host }}" -ZoneName "{{ domain }}" -IPv4Address "{{ ansible_host }}" -CreatePtr
+          Add-DnsServerResourceRecordA -Computername "{{ InternalADServer }}" -Name "{{ dmz_host }}" -ZoneName "{{ domain }}" -IPv4Address "{{ dmz_host_ip }}" -CreatePtr
           Start-Sleep -s 5
 
     - name: Changing NetBiosOption Registry recursively under Interfaces
