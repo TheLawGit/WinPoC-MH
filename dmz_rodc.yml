@@ -20,30 +20,50 @@
         sensitive_parameters:
           - name: Credential
             username: "{{ domain_user }}"
-            password: '{{ domain_password }}'
+            password: "{{ domain_password }}"
+      tags: compobj
 
     - name: Add to AD RODC Replication Group 
       ansible.windows.win_powershell:
         script: |      
-          Add-ADGroupMember -Identity 'Allowed RODC Password Replication Group' -Members "{{ dmz_host }}"
+          param(
+          [PSCredential]$Credential
+          )
+          
+          Add-ADGroupMember -Credential $Credential -Identity 'Allowed RODC Password Replication Group' -Members "{{ dmz_host }}"
           Start-Sleep -s 5
           
-          Add-ADDomainControllerPasswordReplicationPolicy -Identity "{{ RODC }}" -AllowedList "CN={{ dmz_host }},{{ domain_ou }}"
+          Add-ADDomainControllerPasswordReplicationPolicy -Credential $Credential -Identity "{{ RODC }}" -AllowedList "CN={{ dmz_host }},{{ domain_ou }}"
           Start-Sleep -s 5
-          
+        sensitive_parameters:
+          - name: Credential
+            username: "{{ domain_user }}"
+            password: "{{ domain_password }}"
+      tags: replica
+      
     - name: Create DNS Record
       ansible.windows.win_powershell:
         script: |   
-          Add-DnsServerResourceRecordA -Computername "{{ InternalADServer }}" -Name "{{ dmz_host }}" -ZoneName "{{ domain }}" -IPv4Address "{{ dmz_host_ip }}" -CreatePtr
+          param(
+          [PSCredential]$Credential
+          )
+          
+          Add-DnsServerResourceRecordA -Credential $Credential -Computername "{{ InternalADServer }}" -Name "{{ dmz_host }}" -ZoneName "{{ domain }}" -IPv4Address "{{ dmz_host_ip }}" -CreatePtr
           Start-Sleep -s 5
+          
+        sensitive_parameters:
+          - name: Credential
+            username: "{{ domain_user }}"
+            password: "{{ domain_password }}"
+      tags: dns
 
-    - name: Adding DMZ Registry Key
-      ansible.windows.win_regedit:
-        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
-        name: SiteName
-        data: DMZ
-        type: string
-        state: present
+ #   - name: Adding DMZ Registry Key
+ #     ansible.windows.win_regedit:
+ #       path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+ #       name: SiteName
+ #       data: DMZ
+ #       type: string
+ #       state: present
         
     - name: Print joindomain.vbs parameters
       ansible.builtin.debug:
