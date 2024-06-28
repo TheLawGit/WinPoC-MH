@@ -5,7 +5,7 @@
 
     - name: Generate random string with length 24
       ansible.builtin.set_fact:
-        comppass: lookup('community.general.random_string', min_lower=1, min_upper=1, min_special=1, min_numeric=1, length=24)
+        comppass: "{{ lookup('community.general.random_string', min_lower=1, min_upper=1, min_special=1, min_numeric=1, length=24) }}"
   
     - debug:
         var: comppass
