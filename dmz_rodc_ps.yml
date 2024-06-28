@@ -3,7 +3,7 @@
   gather_facts: true
   tasks:
       
-    - name: Create "{{ ansible_hostname }}" Computer Object in Active Directory
+    - name: Generate Random Password
       ansible.windows.win_shell: |
         function Get-RandomPassword
         {
@@ -17,3 +17,8 @@
         }
         Return $NewPassword
         }
+        $comppassword = Get-RandomPassword
+      register: complexpass
+
+      - debug:
+          var: complexpass
