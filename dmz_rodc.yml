@@ -8,10 +8,20 @@
         comppass: "{{ lookup('community.general.random_string', min_lower=1, min_upper=1, min_special=1, min_numeric=1, length=24, override_special='!@#$%^&*') }}"
     
     - name: Create Computer Object in Active Directory
-      ansible.windows.win_shell: |
-        $password = ConvertTo-SecureString -String "{{ domain_password }}" -AsPlainText -Force
-        $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList "{{ domain_user }}", $password
-        New-ADComputer -Credential $Credential -Name "chocodmz" -SamAccountName "chocodmz" -Path "{{ domain_ou }}" -accountPassword (ConvertTo-SecureString -String "{{ comppass }}" -AsPlainText -force)
+      ansible.windows.win_powershell:
+        script: |
+          param(
+          [PSCredential]$Credential
+          )
+          
+          New-ADComputer -Credential $Credential -Name "chocodmz" -SamAccountName "chocodmz" -Path "{{ domain_ou }}" -accountPassword (ConvertTo-SecureString -String "{{ comppass }}" -AsPlainText -force)
+        sensitive_parameters:
+          - name: Credential
+            username: "{{ domain_user }}"
+            password: '{{ domain_password }}'
+
+        #      $password = ConvertTo-SecureString -String "{{ domain_password }}" -AsPlainText -Force
+    #      $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList "{{ domain_user }}", $password
      # vars:
      #   ansible_become: yes
      #   ansible_become_user: "{{ domain_user }}"
