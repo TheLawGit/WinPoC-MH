@@ -14,7 +14,7 @@
           [PSCredential]$Credential
           )
           
-          New-ADComputer -Credential $Credential -Name "{{ dmz_host }}" -SamAccountName "{{ dmz_host }}" -Path "{{ domain_ou }}" -accountPassword (ConvertTo-SecureString -String "{{ comppass }}" -AsPlainText -force)
+          New-ADComputer -Server "{{ domain }}" -Credential $Credential -Name "{{ dmz_host }}" -SamAccountName "{{ dmz_host }}" -Path "{{ domain_ou }}" -accountPassword (ConvertTo-SecureString -String "{{ comppass }}" -AsPlainText -force)
           Start-Sleep -s 5
           
         sensitive_parameters:
