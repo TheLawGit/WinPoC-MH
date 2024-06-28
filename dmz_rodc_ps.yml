@@ -20,5 +20,5 @@
         $comppassword = Get-RandomPassword
       register: complexpass
 
-      - debug:
+    - debug:
           var: complexpass
