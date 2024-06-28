@@ -20,7 +20,10 @@
           Add-ADGroupMember -Identity 'Allowed RODC Password Replication Group' -Members "{{ dmz_host }}"
           Start-Sleep -s 5
 
-          Add-ADDomainControllerPasswordReplicationPolicy -Identity "$RODC" -AllowedList "CN={{ dmz_host }},OU=DMZ,OU=ServersNew,DC=city,DC=medicine-hat,DC=ab,DC=ca"
+          Add-ADDomainControllerPasswordReplicationPolicy -Identity "$RODC" -AllowedList "CN={{ dmz_host }},{{ domain_ou }}"
+          Start-Sleep -s 5
+
+          Add-DnsServerResourceRecordA -Computername $InternalADServer -Name $Machinename -ZoneName $domain -IPv4Address $IPAddress -CreatePtr
           Start-Sleep -s 5
           
         sensitive_parameters:
