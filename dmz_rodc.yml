@@ -8,7 +8,7 @@
         domain_username: "{{ domain_user }}"
         domain_password: "{{ domain_password }}"
         domain_server: "{{ domain_server }}"
-        name: "{{ ansible_hostname }}
+        name: "{{ ansible_hostname }}"
         sam_account_name: "{{ ansible_hostname }}"
         path: "{{ domain_ou }}"
         enabled: true
